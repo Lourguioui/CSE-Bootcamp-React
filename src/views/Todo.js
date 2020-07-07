@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
-export default class sideBar extends Component {
+export default class Todo extends Component {
     render() {
         return (
-            <div className='side-bar'>
+            <div>
                 
             </div>
         )
