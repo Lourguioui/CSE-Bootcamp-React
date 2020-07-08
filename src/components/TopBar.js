@@ -4,13 +4,16 @@ import {
     Col
 } from 'reactstrap';
 
-import '../assets/sideBar.css';
+import '../assets/topbar.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const TopBar = ({}) =>{
     return(
-        <nav className='top-bar fixed-top'>
-
-        </nav>
+        <div className='top-bar fixed-top'>
+            <div className='d-flex justify-content-center align-items-center'>
+                CSE TODO app
+            </div>
+        </div>
     )
 }
 
