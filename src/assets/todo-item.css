@@ -1,0 +1,55 @@
+.todo-item-row {
+  height: 45px;
+  /* background-color: red; */
+  border: solid 0.01px rgba(0, 0, 0, 0.1);
+  border-radius: 2%;
+  margin-top : 2px;
+  margin-bottom : 2px;
+  font-family: "Roboto",sans-serif;
+  background-color: white;
+}
+
+.todo-item-row .todo-cel {
+  height: 100%;
+  font-size: large;
+  font-family: "Roboto",sans-serif;
+}
+
+.btn-header-success {
+  border-color: transparent;
+  background: transparent;
+  border-radius: 50%;
+}
+
+.btn-header-success:hover {
+  background-color: #3e884f;
+  border-color: #3e884f;
+  color: #fff;
+}
+
+.btn-header-danger {
+  border-color: transparent;
+  background: transparent;
+  border-radius: 50%;
+}
+
+.btn-header-danger:hover {
+  background-color: #c43d4b;
+  border-color: #c43d4b;
+  color: #fff;
+}
+
+.btn-header-primary {
+    border-color: transparent;
+    background: transparent;
+    border-radius: 50%;
+  }
+  
+  .btn-header-primary:hover {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+
+
+

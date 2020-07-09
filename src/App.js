@@ -11,9 +11,10 @@ import AppContent from './views/index '
 class App extends Component {
   render() {
     return (
-      
+      <div className="App h-100">
         <AppContent />
-    
+      </div>
+
       // <Suspense fallback={<div>Loading ...</div>}>
       //   <TodoView />
       // </Suspense>
