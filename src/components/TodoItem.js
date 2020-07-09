@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     Row,
     Col,
-    Badge
+    Badge,
+    Tooltip
 } from 'reactstrap';
 import '../assets/todo-item.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,9 +12,15 @@ import { faCheck, faTimes, faArrowRight, faFlag } from "@fortawesome/free-solid-
 export default class TodoItem extends Component {
     constructor(props) {
         super(props);
+        this.toggle = this.toggle.bind(this);
         this.state = {
-
+                isOpen : false
         }
+    }
+    toggle = () =>{
+        this.setState(prevState => {
+            return {isOpen : !prevState.isOpen}
+        })
     }
     render() {
 
@@ -31,7 +38,10 @@ export default class TodoItem extends Component {
                 <Col></Col>
 
                 <Col className="d-flex align-items-center justify-content-end h-100 row-cel">
-                    <FontAwesomeIcon icon={faFlag} color={this.props.task.priority==='normal' ? 'yellowgreen' : this.props.task.priority==='low'?'grey':'red'} />
+                    <FontAwesomeIcon icon={faFlag} id="PriorityFlag" color={this.props.task.priority==='normal' ? 'yellowgreen' : this.props.task.priority==='low'?'grey':'red'} />
+                    <Tooltip placement="top" isOpen={this.state.isOpen}  target="PriorityFlag"  toggle={this.toggle} >
+                        {this.props.task.priority}
+                    </Tooltip>
                 </Col>
                 <Col></Col>
                 <Col className="d-flex align-items-center justify-content-end h-100 row-cel">

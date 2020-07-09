@@ -10,7 +10,8 @@ import {
     Label,
     Row,
     Col,
-    Button
+    Button,
+
 } from 'reactstrap';
 import Select from 'react-select';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -23,13 +24,15 @@ export default class Todo extends Component {
         this.onSelectPriority = this.onSelectPriority.bind(this);
         this.onChangeStatus = this.onChangeStatus.bind(this);
         this.onDeleteItem = this.onDeleteItem.bind(this);
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
         this.state = {
             priorities: [
                 { value: 'urgent', label: 'Urgent' },
                 { value: 'normal', label: 'Normal' },
                 { value: 'low', label: 'Low' }
             ],
-            todoItems : [],
+            todoItems: [],
             item: '',
             priority: '',
             status: 'pending',
@@ -37,25 +40,40 @@ export default class Todo extends Component {
         }
     }
 
-    componentDidMount(){
-        this.setState({todoItems : TodoItems.data})
+    componentDidMount() {
+        this.setState({ todoItems: TodoItems.data })
     }
 
     onSelectPriority = value => {
         this.setState({ priority: value.value })
 
     }
-    onChangeStatus(id, status){
+    onChangeStatus(id, status) {
         let items = [...this.state.todoItems];
         let index = items.findIndex(item => item.id === id);
         console.log("index", index)
         items[index].status = status;
-        this.setState({todoItems : items})
+        this.setState({ todoItems: items })
     }
-    onDeleteItem(id){
+    onDeleteItem(id) {
         let items = [...this.state.todoItems];
         let index = items.findIndex(item => item.id === id);
-        items.splice(index,1)
+        items.splice(index, 1)
+        this.setState({ todoItems: items })
+    }
+
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+
+    onSubmit() {
+        let items = [...this.state.todoItems];
+        let id = items.length + 1
+        let today = new Date();
+        let created_at = today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate();
+        const status = 'pending'
+        const newItem = { id: id, Task: this.state.item, priority: this.state.priority, status: status, created_at: created_at }
+        items.push(newItem);
         this.setState({todoItems : items})
     }
 
@@ -72,7 +90,10 @@ export default class Todo extends Component {
                                 <Row>
                                     <Col>
                                         <Input
+                                            name='item'
                                             placeholder='Item'
+                                            value={this.state.item}
+                                            onChange={e => this.onChange(e)}
                                         />
                                     </Col>
                                     <Col>
@@ -89,6 +110,7 @@ export default class Todo extends Component {
                             className="btn-block"
                             color="success"
                             style={{ borderRadius: 0 }}
+                            onClick={() => this.onSubmit()}
                         >
                             Add item
                         </Button>
@@ -99,12 +121,12 @@ export default class Todo extends Component {
                 <Col lg="8" xs="12" className="mt-4">
                     <Card className="todo-card" outline color="white">
                         {this.state.todoItems.map(item => (
-                            <TodoItem 
+                            <TodoItem
                                 key={item.id}
                                 task={item}
-                                onPending = {() => this.onChangeStatus(item.id, 'pending')}
-                                onDone = {() => this.onChangeStatus(item.id, 'done')}
-                                onDelete = {() => this.onDeleteItem(item.id)}
+                                onPending={() => this.onChangeStatus(item.id, 'pending')}
+                                onDone={() => this.onChangeStatus(item.id, 'done')}
+                                onDelete={() => this.onDeleteItem(item.id)}
                             />
                         ))
 
